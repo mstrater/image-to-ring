@@ -1,8 +1,9 @@
+// Provides imageHeightmap, imageWidth, and imageHeight
 include <heightmap.scad>
 
-$vpt = [0, 0, 50];
-$vpr = [60, 0, 360 * $t];
-$vpd = 330;
+// $vpt = [0, 0, 50];
+// $vpr = [60, 0, 360 * $t];
+// $vpd = 330;
 
 function cylindricalToCartesian(point) =
 	let (r = point[0])
@@ -57,7 +58,8 @@ function cylinderPolyhedronCapFaces(imgWidth, imgHeight) =
 		[for (i = [imgHeight * imgWidth - 1 : -1 : (imgHeight - 1) * imgWidth]) i]
 	];
 
-module HeightmapCylinderPolyhedron(heightmap, imgWidth, imgHeight, depthFactor, cylHeight, cylBaseRadius) {
+module HeightmapCylinderPolyhedron(heightmap, imgWidth, imgHeight, patternThickness, cylHeight, cylBaseRadius) {
+	let (depthFactor = patternThickness/255)
 	polyhedron(
 		points = heightmapToCylinderPolyhedronPoints(heightmap, imgWidth, imgHeight, depthFactor, cylHeight, cylBaseRadius),
 		faces = concat(cylinderPolyhedronCurvedFaces(imgWidth, imgHeight),
@@ -69,4 +71,7 @@ module HeightmapCylinderPolyhedron(heightmap, imgWidth, imgHeight, depthFactor, 
 // random = rands(0, 1, totalPoints);
 // hm = [for (x = [0 : totalPoints]) random[x]];
 // HeightmapCylinderPolyhedron(hm, 30, 20, 1, 10, 5);
-HeightmapCylinderPolyhedron(imageHeightmap, 150, 100, 0.03, 100, 150/PI/2);
+baseDiameter = 14.89 + 1;
+baseCircum = PI * baseDiameter;
+
+HeightmapCylinderPolyhedron(imageHeightmap, imageWidth, imageHeight, 0.3, baseCircum * imageHeight / imageWidth, baseDiameter/2);

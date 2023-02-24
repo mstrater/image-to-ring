@@ -3,19 +3,23 @@ const fs = require("fs");
 
 const src = "input.png";
 const startContent = "imageHeightmap = [";
-const endContent = "];";
+const endContent = "];\n";
 
 getPixels(src, (err, pixels) => {
 	if(err) {
-		console.error("Bad image path");
+		console.error(err);
 		return;
 	}
 
-	const stream = fs.createWriteStream("heightmap.scad");
-	stream.write(startContent);
-
 	const width = pixels.shape[0];
 	const height = pixels.shape[1];
+
+	const stream = fs.createWriteStream("heightmap.scad");
+	stream.write("imageWidth = " + width + ";\n");
+	stream.write("imageHeight = " + height + ";\n");
+
+	stream.write(startContent);
+
 	for (let y = height - 1; y >= 0; y--) {
 		for (let x = 0; x < width; x++) {
 			const r = pixels.get(x, y, 0);
