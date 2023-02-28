@@ -36,5 +36,5 @@ getPixels(src, (err, pixels) => {
 
 	stream.write(endContent);
 	stream.close();
-	console.log("Finished!");
+	console.log("Finished generating heightmap");
 });

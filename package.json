@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "imageToRing": "npm run imageToHeightmap && npm run heightmapToRing",
+    "imageToHeightmap": "node index.js",
+    "heightmapToRing": "echo Generating model, please wait until you see \"Finished!\" in the console... && \"C://Program Files/OpenSCAD/openscad\" -o output.stl heightmapToRing.scad && echo Finished! See output.stl for results.",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
