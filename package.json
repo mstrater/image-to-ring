@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "imageToRing": "npm run imageToHeightmap && npm run heightmapToRing",
-    "imageToHeightmap": "node index.js",
-    "heightmapToRing": "echo Generating model, please wait until you see \"Finished!\" in the console... && \"C://Program Files/OpenSCAD/openscad\" -o output.stl heightmapToRing.scad && echo Finished! See output.stl for results.",
+    "image-to-ring": "npm run image-to-heightmap && npm run heightmap-to-ring",
+    "image-to-heightmap": "node index.js",
+    "heightmap-to-ring": "echo Generating model, please wait until you see \"Finished!\" in the console. It can take quite a while... && \"C://Program Files/OpenSCAD/openscad\" -o output.stl heightmapToRing.scad && echo Finished! See output.stl for results.",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

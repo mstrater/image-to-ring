@@ -1,9 +1,27 @@
-const getPixels = require("get-pixels");
-const fs = require("fs");
+import getPixels from "get-pixels";
+//const getPixels = require("get-pixels");
+import * as fs from 'fs';
+import { parseArgs } from "node:util";
 
 const src = "input.png";
 const startContent = "imageHeightmap = [";
 const endContent = "];\n";
+
+// Handle CLI args
+const {
+	values: { name, cool },
+} = parseArgs({
+	options: {
+	name: {
+		type: "string",
+		short: "n",
+	},
+	cool: {
+		type: "boolean",
+		short: "c",
+	},
+	},
+});
 
 getPixels(src, (err, pixels) => {
 	if(err) {

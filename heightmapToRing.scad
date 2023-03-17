@@ -71,7 +71,7 @@ module HeightmapCylinderPolyhedron(heightmap, imgWidth, imgHeight, patternThickn
 // random = rands(0, 1, totalPoints);
 // hm = [for (x = [0 : totalPoints]) random[x]];
 // HeightmapCylinderPolyhedron(hm, 30, 20, 1, 10, 5);
-baseDiameter = 14.89 + 1;
+baseDiameter = 14.89 + 2 * 1.1;
 baseCircum = PI * baseDiameter;
 
-HeightmapCylinderPolyhedron(imageHeightmap, imageWidth, imageHeight, 0.3, baseCircum * imageHeight / imageWidth, baseDiameter/2);
+HeightmapCylinderPolyhedron(imageHeightmap, imageWidth, imageHeight, 0.5, baseCircum * imageHeight / imageWidth, baseDiameter/2);
