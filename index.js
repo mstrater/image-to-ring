@@ -1,7 +1,8 @@
 import getPixels from "get-pixels";
-//const getPixels = require("get-pixels");
 import * as fs from 'fs';
 import { parseArgs } from "node:util";
+import { exec } from 'child_process';
+//const execProm = promisify(exec);
 
 const src = "input.png";
 const startContent = "imageHeightmap = [";
@@ -29,6 +30,8 @@ getPixels(src, (err, pixels) => {
 		return;
 	}
 
+	console.log("Generating heightmap from image.")
+
 	const width = pixels.shape[0];
 	const height = pixels.shape[1];
 
@@ -53,6 +56,22 @@ getPixels(src, (err, pixels) => {
 	}
 
 	stream.write(endContent);
-	stream.close();
-	console.log("Finished generating heightmap");
+	stream.close((error) => {
+		if (error) {
+			console.error("An error occurred: " + error);
+		} else {
+			console.log("Finished generating heightmap.\nGenerating model, please wait" +
+				" until you see \"Finished!\" in the console. It can take quite a while...");
+			const scadProc = exec("\"C://Program Files/OpenSCAD/openscad\" -o output.stl heightmapToRing.scad", (error, stdout, stderr) => {
+				if (error) {
+					console.error("An error occurred: " + error);
+				} else {
+					console.log("Finished! See output.stl for results.");
+				}
+			});
+			scadProc.stdout.on('data', (data) => {
+				console.log(data); 
+			});
+		}
+	});
 });

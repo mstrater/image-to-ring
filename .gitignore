@@ -1,3 +1,4 @@
 frame*.png
 node_modules
 output.stl
+heightmap.scad
