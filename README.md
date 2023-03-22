@@ -40,7 +40,8 @@ Here are some model screenshots and the sf/commands used to create them.
 
 # Notes
 * Generating the 3D model is very slow. If you are iterating quickly, I recommend using a reduced resolution version of your image during the design process.
-* By making the **hole-radius** >= **radius**, the bottom of the heightmap (black areas) will cut all the way through the ring, allowing for some interesting results.
+* By making the **hole-radius** > **radius**, the bottom of the heightmap (darkest areas) will cut all the way through the ring, allowing for some interesting results.
+	* If you do this, make sure **hole-radius** - **radius** > 0.001 or the design might not actually cut through the surface.
 * If you are intending to make a ring, this [table of ring sizes](https://en.wikipedia.org/wiki/Ring_size#Equivalency_table) in several different measurement systems is useful.
 * The height of the cylinder that's generated depends on the aspect ratio of the input image and the cylinder **radius** specified. As such, you may need to compute a good aspect ratio for the image to get the desired **ring width**.
 	* To compute the image aspect ratio `a` for a desired **ring width** `w`, you can do:
