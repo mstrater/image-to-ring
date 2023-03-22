@@ -36,9 +36,10 @@ How big should the ring **hole radius** be in mm? Set this to 0 to have no hole 
 	* Defaults to `7.445`.
 
 # Examples
-Here are some model screenshots and the images/commands used to create them.
+Here are some model screenshots and the sf/commands used to create them.
 
 # Notes
+* Generating the 3D model is very slow. If you are iterating quickly, I recommend using a reduced resolution version of your image during the design process.
 * By making the **hole-radius** >= **radius**, the bottom of the heightmap (black areas) will cut all the way through the ring, allowing for some interesting results.
 * If you are intending to make a ring, this [table of ring sizes](https://en.wikipedia.org/wiki/Ring_size#Equivalency_table) in several different measurement systems is useful.
 * The height of the cylinder that's generated depends on the aspect ratio of the input image and the cylinder **radius** specified. As such, you may need to compute a good aspect ratio for the image to get the desired **ring width**.

@@ -11,6 +11,8 @@ include <heightmap.scad>
 // $vpr = [60, 0, 360 * $t];
 // $vpd = 330;
 
+eps = 0.001;
+
 function cylindricalToCartesian(point) =
 	let (r = point[0])
 	let (theta = point[1])
@@ -27,7 +29,7 @@ function cartesianToCylindrical(point) =
 
 // Heightmap should be one long list of individual numbers representing the image values from bottom left in rows going up
 function heightmapToCylinderPolyhedronPoints(heightmap, imgWidth, imgHeight, depthFactor, cylHeight, cylBaseRadius) =
-	let (heightIncrement = cylHeight/imgHeight)
+	let (heightIncrement = cylHeight/(imgHeight - 1))
 	let (thetaIncrement = 360/imgWidth)
 	[
 		for (y = [0 : imgHeight - 1], x = [0 : imgWidth - 1])
@@ -75,5 +77,10 @@ module HeightmapCylinderPolyhedron(heightmap, imgWidth, imgHeight, heightmapThic
 
 baseDiameter = 2 * radius;
 baseCircum = PI * baseDiameter;
+cylHeight = baseCircum * imageHeight / imageWidth;
 
-HeightmapCylinderPolyhedron(imageHeightmap, imageWidth, imageHeight, thickness, baseCircum * imageHeight / imageWidth, baseDiameter/2);
+difference() {
+	HeightmapCylinderPolyhedron(imageHeightmap, imageWidth, imageHeight, thickness, cylHeight, baseDiameter/2);
+	translate([0, 0, -eps])
+		cylinder(h = cylHeight + 2 * eps, r = holeRadius, $fn=200, center = false);
+}
