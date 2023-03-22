@@ -4,15 +4,15 @@ This is a command line utility that allows you to wrap an image (interpreted as 
 # Installation
 1. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) this repository.
 1. Install [OpenSCAD](http://openscad.org/downloads.html).
-	* These instructions assume you are running Windows. If you install somewhere other than the default location (`C:\Program Files\OpenSCAD\openscad`), you'll have to update the `heightmapToRing` script in [package.json](package.json) with the installation directory.
-	* On MacOS you might have to follow [these instructions](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_OpenSCAD_in_a_command_line_environment#MacOS_notes) to get the command line interface to OpenSCAD working. You'll also have to update the `heightmapToRing` script in [package.json](package.json) with the correct installation directory.
+	* These instructions assume you are running Windows. If you install somewhere other than the default location (`C:\Program Files\OpenSCAD\openscad`), you'll have to update the path in [image-to-ring.js](image-to-ring.js) with the installation directory.
+	* On MacOS you might have to follow [these instructions](https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_OpenSCAD_in_a_command_line_environment#MacOS_notes) to get the command line interface to OpenSCAD working. You'll also have to update the path in [image-to-ring.js](image-to-ring.js) with the correct installation directory.
 1. Install [Node.js](https://nodejs.org/en/download).
 1. Run `npm install` from the root directory of this repo.
 
 # How to Use
 As a quick start, or to check if everything is installed correctly
 ```
-npm run image-to-ring
+node image-to-ring.js
 ```
 
 ## Options
@@ -33,7 +33,7 @@ What is the desired **heightmap thickness** in mm? That is, given an image that 
 * `-h <hole-radius>`\
 `--hole-radius <hole-radius>`\
 How big should the ring **hole radius** be in mm? Set this to 0 to have no hole at all (a full cylinder).
-	* Defaults to `14.98`.
+	* Defaults to `7.445`.
 
 # Examples
 Here are some model screenshots and the images/commands used to create them.

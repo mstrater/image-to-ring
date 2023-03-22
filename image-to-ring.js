@@ -2,42 +2,70 @@ import getPixels from "get-pixels";
 import * as fs from 'fs';
 import { parseArgs } from "node:util";
 import { exec } from 'child_process';
-//const execProm = promisify(exec);
 
-const src = "input.png";
 const startContent = "imageHeightmap = [";
 const endContent = "];\n";
 
 // Handle CLI args
 const {
-	values: { name, cool },
+	values: { imagePath, radius, thickness, holeRadius },
 } = parseArgs({
 	options: {
-	name: {
-		type: "string",
-		short: "n",
-	},
-	cool: {
-		type: "boolean",
-		short: "c",
-	},
+		imagePath: {
+			type: "string",
+			short: "i",
+		},
+		radius: {
+			type: "string",
+			short: "r",
+		},
+		thickness: {
+			type: "string",
+			short: "t",
+		},
+		holeRadius: {
+			type: "string",
+			short: "h",
+		},
 	},
 });
 
-getPixels(src, (err, pixels) => {
+// Parse CLI args and use default values if needed
+let imagePathArg = imagePath ?? "input.png";
+let radiusArg = parseFloat(radius);
+radiusArg = isNaN(radiusArg) ? 8.545 : radiusArg;
+let thicknessArg = parseFloat(thickness);
+thicknessArg = isNaN(thicknessArg) ? 0.5 : thicknessArg;
+let holeRadiusArg = parseFloat(holeRadius);
+holeRadiusArg = isNaN(holeRadiusArg) ? 7.445 : holeRadiusArg;
+
+getPixels(imagePathArg, (err, pixels) => {
 	if(err) {
 		console.error(err);
 		return;
 	}
 
-	console.log("Generating heightmap from image.")
+	console.log("Generating heightmap from image.");
+
+	// Generate the parameter/heightmap scad file
+	const stream = fs.createWriteStream("heightmap.scad");
+	// Write out the CLI args
+	const rString = "radius = " + radiusArg + ";\n";
+	const tString = "thickness = " + thicknessArg + ";\n";
+	const hString = "holeRadius = " + holeRadiusArg + ";\n";
+	const argsString = rString + tString + hString;
+	console.log(argsString)
+	stream.write(argsString);
 
 	const width = pixels.shape[0];
 	const height = pixels.shape[1];
 
-	const stream = fs.createWriteStream("heightmap.scad");
-	stream.write("imageWidth = " + width + ";\n");
-	stream.write("imageHeight = " + height + ";\n");
+	// Write out the image size
+	const widthString = "imageWidth = " + width + ";\n";
+	const heightString = "imageHeight = " + height + ";\n";
+	const sizeString = widthString + heightString;
+	console.log(sizeString);
+	stream.write(sizeString);
 
 	stream.write(startContent);
 

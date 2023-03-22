@@ -1,4 +1,10 @@
-// Provides imageHeightmap, imageWidth, and imageHeight
+// Provides:
+//	radius
+//	thickness
+//	holeRadius
+//	imageWidth
+//	imageHeight
+//	imageHeightmap
 include <heightmap.scad>
 
 // $vpt = [0, 0, 50];
@@ -58,8 +64,8 @@ function cylinderPolyhedronCapFaces(imgWidth, imgHeight) =
 		[for (i = [imgHeight * imgWidth - 1 : -1 : (imgHeight - 1) * imgWidth]) i]
 	];
 
-module HeightmapCylinderPolyhedron(heightmap, imgWidth, imgHeight, patternThickness, cylHeight, cylBaseRadius) {
-	let (depthFactor = patternThickness/255)
+module HeightmapCylinderPolyhedron(heightmap, imgWidth, imgHeight, heightmapThickness, cylHeight, cylBaseRadius) {
+	let (depthFactor = heightmapThickness/255)
 	polyhedron(
 		points = heightmapToCylinderPolyhedronPoints(heightmap, imgWidth, imgHeight, depthFactor, cylHeight, cylBaseRadius),
 		faces = concat(cylinderPolyhedronCurvedFaces(imgWidth, imgHeight),
@@ -67,11 +73,7 @@ module HeightmapCylinderPolyhedron(heightmap, imgWidth, imgHeight, patternThickn
 	);
 }
 
-// totalPoints = 600;
-// random = rands(0, 1, totalPoints);
-// hm = [for (x = [0 : totalPoints]) random[x]];
-// HeightmapCylinderPolyhedron(hm, 30, 20, 1, 10, 5);
-baseDiameter = 14.89 + 2 * 1.1;
+baseDiameter = 2 * radius;
 baseCircum = PI * baseDiameter;
 
-HeightmapCylinderPolyhedron(imageHeightmap, imageWidth, imageHeight, 0.5, baseCircum * imageHeight / imageWidth, baseDiameter/2);
+HeightmapCylinderPolyhedron(imageHeightmap, imageWidth, imageHeight, thickness, baseCircum * imageHeight / imageWidth, baseDiameter/2);
