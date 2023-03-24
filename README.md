@@ -16,7 +16,8 @@ node image-to-ring.js
 ```
 
 ## Options
-The following are the available command line options in this project. Please refer to this diagram for the bolded terms used in the options:
+The following are the available command line options in this project. Please refer to this diagram for the bolded terms used in this document:
+![Ring diagram](assets/RingDiagram.svg)
 
 * `-i <image-path>`\
 `--image <image-path>`\
@@ -33,18 +34,20 @@ What is the desired **heightmap thickness** in mm? That is, given an image that 
 * `-h <hole-radius>`\
 `--hole-radius <hole-radius>`\
 How big should the ring **hole radius** be in mm? Set this to 0 to have no hole at all (a full cylinder).
-	* Defaults to `7.445`.
+	* Defaults to `0`.
 
 # Examples
 Here are some model screenshots and the sf/commands used to create them.
 
 # Notes
-* Generating the 3D model is very slow. If you are iterating quickly, I recommend using a reduced resolution version of your image during the design process.
-* By making the **hole-radius** > **radius**, the bottom of the heightmap (darkest areas) will cut all the way through the ring, allowing for some interesting results.
-	* If you do this, make sure **hole-radius** - **radius** > 0.001 or the design might not actually cut through the surface.
+* Generating the 3D model is extremely slow (especially if **hole radius** != 0). If you are iterating quickly, I recommend using a reduced resolution version of your image during the design process.
+	* In the future, I'm hoping to move to a different technology to improve performance.
+* By making the **hole radius** > **radius**, the bottom of the heightmap (darkest areas) will cut all the way through the ring, allowing for some interesting results.
+	* If you do this, make sure **hole radius** - **radius** > 0.001 or the design might not actually cut through the surface.
 * If you are intending to make a ring, this [table of ring sizes](https://en.wikipedia.org/wiki/Ring_size#Equivalency_table) in several different measurement systems is useful.
 * The height of the cylinder that's generated depends on the aspect ratio of the input image and the cylinder **radius** specified. As such, you may need to compute a good aspect ratio for the image to get the desired **ring width**.
 	* To compute the image aspect ratio `a` for a desired **ring width** `w`, you can do:
 		* `a = 2 * radius * π / w`
-	* As an example, let's say I want to create a US size 4 ring with a total **ring thickness** of 1.6mm and a **width** of 5mm. If we assume a **heightmap thickness** of 0.5mm, that means we need a **base thickness** of 1.6mm - 0.5mm = 1.1mm. A US size 4 ring has an internal diameter of 14.89mm or a **hole-radius** of half that: 7.445mm. That means the cylinder **radius** is 7.445mm + 1.1mm = 8.545mm. Plug that into the equation and we get: `a = 2 * 8.545 * π / 5 ≈ 10.7`. That means the image aspect ratio needs to be about 10.7:1.
+	* As an example, let's say I want to create a US size 4 ring with a total **ring thickness** of 1.6mm and a **width** of 5mm. If we assume a **heightmap thickness** of 0.5mm, that means we need a **base thickness** of 1.6mm - 0.5mm = 1.1mm. A US size 4 ring has an internal diameter of 14.89mm or a **hole radius** of half that: 7.445mm. That means the cylinder **radius** is 7.445mm + 1.1mm = 8.545mm. Plug that into the equation and we get: `a = 2 * 8.545 * π / 5 ≈ 10.7`. That means the image aspect ratio needs to be about 10.7:1.
+* Using [GIMP](https://www.gimp.org/)'s Bloom filter (Filters -> Light and Shadow -> Bloom) can create nice gradients in designs that result in a scalloped effect.
 * There are various services that will 3D print a ring in metal for you from a model. However, be aware of the use of [conflict minerals](https://en.wikipedia.org/wiki/Conflict_minerals_law) in this process before you decide to proceed.

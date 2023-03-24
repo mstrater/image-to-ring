@@ -82,5 +82,5 @@ cylHeight = baseCircum * imageHeight / imageWidth;
 difference() {
 	HeightmapCylinderPolyhedron(imageHeightmap, imageWidth, imageHeight, thickness, cylHeight, baseDiameter/2);
 	translate([0, 0, -eps])
-		cylinder(h = cylHeight + 2 * eps, r = holeRadius, $fn=200, center = false); // Ring hole
+		cylinder(h = cylHeight + 2 * eps, r = holeRadius, $fn=100, center = false); // Ring hole
 }

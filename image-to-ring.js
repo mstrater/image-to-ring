@@ -37,7 +37,7 @@ radiusArg = isNaN(radiusArg) ? 8.545 : radiusArg;
 let thicknessArg = parseFloat(thickness);
 thicknessArg = isNaN(thicknessArg) ? 0.5 : thicknessArg;
 let holeRadiusArg = parseFloat(holeRadius);
-holeRadiusArg = isNaN(holeRadiusArg) ? 7.445 : holeRadiusArg;
+holeRadiusArg = isNaN(holeRadiusArg) ? 0 /*7.445*/ : holeRadiusArg;
 
 getPixels(imagePathArg, (err, pixels) => {
 	if(err) {
