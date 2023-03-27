@@ -37,7 +37,20 @@ How big should the ring **hole radius** be in mm? Set this to 0 to have no hole 
 	* Defaults to `0`.
 
 # Examples
-Here are some model screenshots and the sf/commands used to create them.
+Here are some model screenshots and the images/commands used to create them.
+
+### Minkowski Curve Ring
+![Minkowski Curve](assets/minkowski-curve.png)
+![Minkowski Curve Result](assets/minkowski-curve-result.png)
+```
+node image-to-ring.js -i assets/minkowski-curve.png -h 7.445
+```
+### Brick Texture Roller
+![Brick Texture Roller](assets/brick-texture-roller.png)
+![Brick Texture Roller Result](assets/brick-texture-roller-result.png)
+```
+node image-to-ring.js -i assets/brick-texture-roller.png -r 25 -t 2
+```
 
 # Notes
 * Generating the 3D model is extremely slow (especially if **hole radius** != 0). If you are iterating quickly, I recommend using a reduced resolution version of your image during the design process.
