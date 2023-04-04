@@ -39,11 +39,35 @@ How big should the ring **hole radius** be in mm? Set this to 0 to have no hole 
 # Examples
 Here are some model screenshots and the images/commands used to create them.
 
+### William Morris Venetian Ring
+![William Morris Venetian](assets/william-morris-venetian.png)
+![William Morris Venetian Result](assets/william-morris-venetian-result.png)
+```
+node image-to-ring.js -i assets/william-morris-venetian.png
+```
+### Maze Ring
+![Maze](assets/maze.png)
+![Maze Result](assets/maze-result.png)
+```
+node image-to-ring.js -i assets/maze.png -h 7.445
+```
+### Sinusoid Pattern Ring
+![Sinusoid Pattern](assets/sinusoid.png)
+![Sinusoid Pattern Result](assets/sinusoid-result.png)
+```
+node image-to-ring.js -i assets/sinusoid.png -h 7.445
+```
 ### Minkowski Curve Ring
 ![Minkowski Curve](assets/minkowski-curve.png)
 ![Minkowski Curve Result](assets/minkowski-curve-result.png)
 ```
 node image-to-ring.js -i assets/minkowski-curve.png -h 7.445
+```
+### Circles Ring
+![Circles](assets/circles.png)
+![Circles Result](assets/circles-result.png)
+```
+node image-to-ring.js -i assets/circles.png -h 7.445 -t 2 -r 6.945
 ```
 ### Brick Texture Roller
 ![Brick Texture Roller](assets/brick-texture-roller.png)
